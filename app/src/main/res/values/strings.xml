@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">FormApp</string>
+    <string name="personalText">Richardson, Sam 4/17/2018</string>
+    <string name="nameText">Name:</string>
+    <string name="userText">User Name:</string>
+    <string name="emailTag">Email:</string>
+    <string name="ageTag">Age:</string>
+    <string name="name_input">Enter Name</string>
+    <string name="user_name_input">Enter User Name</string>
+    <string name="email_input">Enter Email Address</string>
+    <string name="birthday_input">Select Your Birthday</string>
+    <string name="submitText">Submit</string>
+    <string name="backText">Go Back</string>
+</resources>
