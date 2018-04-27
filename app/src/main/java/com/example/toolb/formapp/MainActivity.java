@@ -1,32 +1,21 @@
 package com.example.toolb.formapp;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
-import java.util.Calendar;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity  {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private EditText nameInput;
-    private EditText userNameInput;
-    private EditText emailInput;
-    private String date;
+    private EditText jobInput;
+    private EditText descriptionInput;
+    private EditText ageInput;
     private Button errorButton;
-    private TextView mDisplayDate;
-    private int month_x, day_x, year_x;
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,51 +24,11 @@ public class MainActivity extends AppCompatActivity  {
 
 
         nameInput = findViewById(R.id.nameTextEdit);
-        userNameInput = findViewById(R.id.UserNameTextEdit);
-        emailInput = findViewById(R.id.EmailTextEdit);
-        mDisplayDate = findViewById(R.id.dateTextView);
+        ageInput = findViewById(R.id.ageTextEdit);
         errorButton = findViewById(R.id.SubmitButton);
+        jobInput = findViewById(R.id.jobTextEdit);
+        descriptionInput = findViewById(R.id.descriptionTextEdit);
 
-
-        mDisplayDate.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dialog = new DatePickerDialog (
-                        MainActivity.this,
-                        //android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth,
-                        android.R.style.Theme_DeviceDefault_Dialog_Alert,
-                        mDateSetListener,
-                        year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-                dialog.show();
-            }
-        });
-
-
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                month_x = month;
-                day_x = day;
-                year_x = year;
-                date = month + "/" + day + "/" + year;
-                if (is18(month, day, year)){
-                    mDisplayDate.setText(date +"\n");
-                    if ((nameInput != null) && (userNameInput != null) && (emailInput != null))
-                        errorButton.setText("Submit");
-                }
-                else {
-                    mDisplayDate.setText(date +"\n");
-                    errorButton.setText("You must be 18 yrs old.");
-                }
-            }
-        };
     }
 
     public void goToSecondActivity(View view) {
@@ -87,7 +36,6 @@ public class MainActivity extends AppCompatActivity  {
         StringBuilder errMsg = new StringBuilder();
         int numErrors = 0;
         Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-
 
         if (isValid(nameInput)){
             intent.putExtra(Constants.KEY_NAME, nameInput.getText().toString());
@@ -97,20 +45,25 @@ public class MainActivity extends AppCompatActivity  {
             errMsg.append("name input error").append("\n");
         }
 
-
-        if (isValid(userNameInput)) {
-            intent.putExtra(Constants.KEY_USER_NAME, userNameInput.getText().toString());
+        if (isValid(jobInput)) {
+            intent.putExtra(Constants.KEY_JOB, jobInput.getText().toString());
         } else {
             numErrors += 1;
-            errMsg.append("username input error").append("\n");
+            errMsg.append("job input error").append("\n");
         }
 
-
-        if (isValid(emailInput)) {
-            intent.putExtra(Constants.KEY_EMAIL, emailInput.getText().toString());
+        if (isValid(ageInput)) {
+            intent.putExtra(Constants.KEY_AGE, ageInput.getText().toString());
         } else {
             numErrors += 1;
-            errMsg.append("email input error").append("\n");
+            errMsg.append("age input error").append("\n");
+        }
+
+        if (isValid(descriptionInput)) {
+            intent.putExtra(Constants.KEY_DESC, descriptionInput.getText().toString());
+        } else {
+            numErrors += 1;
+            errMsg.append("description input error").append("\n");
         }
 
         if (numErrors == 0) {
@@ -124,24 +77,6 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
-    public boolean is18(int MM, int DD, int YYYY){
-        int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
-        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        boolean age = false;
-
-        if ((currentYear - YYYY) == 18) {
-            if (currentMonth <= MM) {
-                if (currentDay <= DD) {
-                    age = true;
-                }
-            }
-        }
-        if ((currentYear - YYYY) > 18){
-            age = true;
-        }
-        return age;
-    }
 
     public boolean isValid(EditText input) {
 
@@ -156,18 +91,6 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(TAG, "onStart()");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.i(TAG, "onRestart()");
-    }
-
-    @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
@@ -176,16 +99,16 @@ public class MainActivity extends AppCompatActivity  {
             nameInput.setText((String)savedInstanceState.get(Constants.KEY_NAME));
         }
 
-        if (savedInstanceState.containsKey(Constants.KEY_USER_NAME)) {
-            userNameInput.setText((String) savedInstanceState.get(Constants.KEY_USER_NAME));
+        if (savedInstanceState.containsKey(Constants.KEY_AGE)) {
+            ageInput.setText((String) savedInstanceState.get(Constants.KEY_AGE));
         }
 
-        if (savedInstanceState.containsKey(Constants.KEY_EMAIL)) {
-            emailInput.setText((String) savedInstanceState.get(Constants.KEY_EMAIL));
+        if (savedInstanceState.containsKey(Constants.KEY_JOB)) {
+            jobInput.setText((String) savedInstanceState.get(Constants.KEY_JOB));
         }
 
-        if (savedInstanceState.containsKey(Constants.KEY_DOB)) {
-            mDisplayDate.setText((String) savedInstanceState.get(Constants.KEY_DOB));
+        if (savedInstanceState.containsKey(Constants.KEY_DESC)) {
+            descriptionInput.setText((String) savedInstanceState.get(Constants.KEY_DESC));
         }
     }
 
@@ -195,10 +118,9 @@ public class MainActivity extends AppCompatActivity  {
 
         Log.i(TAG, "onSaveInstanceState()");
         outState.putString(Constants.KEY_NAME, nameInput.getText().toString());
-        outState.putString(Constants.KEY_USER_NAME, userNameInput.getText().toString());
-        outState.putString(Constants.KEY_EMAIL, emailInput.getText().toString());
-        outState.putString(Constants.KEY_DOB, mDisplayDate.getText().toString());
-    }
+        outState.putString(Constants.KEY_JOB, jobInput.getText().toString());
+        outState.putString(Constants.KEY_DESC, descriptionInput.getText().toString());
+        outState.putString(Constants.KEY_AGE, ageInput.getText().toString());    }
 
     @Override
     protected void onDestroy() {
@@ -224,6 +146,18 @@ public class MainActivity extends AppCompatActivity  {
     protected void onStop() {
         super.onStop();
         Log.i(TAG, "onStop()");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "onStart()");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i(TAG, "onRestart()");
     }
 
 }

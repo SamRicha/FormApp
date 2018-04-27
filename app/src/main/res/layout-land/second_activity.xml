@@ -1,35 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".SecondActivity">
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
 
-    <TextView
-        android:id="@+id/messageTextView"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:layout_marginTop="20dp"
-        android:text=""
-        android:textAlignment="center"
-        android:textSize="24sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".SecondActivity">
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="25dp"
-        android:paddingBottom="25dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:textSize="20sp"
-        android:text="@string/backText"
-        android:layout_marginLeft="45dp"
-        android:onClick="goToMainActivity"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:src="@drawable/pic"
+                />
+        </LinearLayout>
 
 
-</LinearLayout>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginBottom="3dp"
+                    android:text="@string/nameText"
+                    android:textSize="8pt" />
+
+                <TextView
+                    android:id="@+id/nameDisplayTextView"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity=""
+                    android:layout_marginBottom="3dp"
+                    android:text="[name]"
+                    android:textSize="8pt" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginBottom="3dp"
+                    android:text="@string/ageTag"
+                    android:textSize="8pt" />
+
+                <TextView
+                    android:id="@+id/ageDisplayTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="3dp"
+                    android:text="[age]"
+                    android:textSize="8pt" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginBottom="3dp"
+                    android:text="@string/jobText"
+                    android:textSize="8pt" />
+
+                <TextView
+                    android:id="@+id/occupationDisplayTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="3dp"
+                    android:text="[occupation]"
+                    android:textSize="8pt" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginBottom="3dp"
+                    android:text="@string/descText"
+                    android:textSize="8pt" />
+
+                <TextView
+                    android:id="@+id/descriptionDisplayTextView"
+                    android:layout_width="275dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="[description]"
+                    android:textSize="8pt" />
+
+            </TableRow>
+
+
+        </TableLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/goBackButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:textSize="20sp"
+                android:onClick="goToMainActivity"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="30dp"
+                android:text="Go Back" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

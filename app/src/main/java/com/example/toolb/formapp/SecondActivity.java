@@ -12,12 +12,10 @@ import android.widget.TextView;
 public class SecondActivity extends AppCompatActivity {
 
     private static final String TAG = SecondActivity.class.getSimpleName();
-    private TextView messageView;
-    private EditText nameIn;
-    private EditText userNameIn;
-    private EditText emailIn;
-    private TextView dobIn;
-    private Button loginBtn;
+    private TextView nameDisplay;
+    private TextView ageDisplay;
+    private TextView jobDisplay;
+    private TextView descriptionDisplay;
 
 
     @Override
@@ -25,9 +23,11 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity);
 
-        messageView = findViewById(R.id.messageTextView);
+        nameDisplay = findViewById(R.id.nameDisplayTextView);
+        ageDisplay = findViewById(R.id.ageDisplayTextView);
+        jobDisplay = findViewById(R.id.occupationDisplayTextView);
+        descriptionDisplay = findViewById(R.id.descriptionDisplayTextView);
 
-        StringBuilder msg = new StringBuilder("Thanks for signing up, ");
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -38,15 +38,42 @@ public class SecondActivity extends AppCompatActivity {
             String name = b.getString(Constants.KEY_NAME);
             String lowerCaseName = name.toLowerCase();
             String properName = lowerCaseName.substring(0, 1).toUpperCase() + lowerCaseName.substring(1);
-            msg.append(properName).append("!");
+            nameDisplay.setText(properName);
         }
 
-        messageView.setText(msg);
+        if (b.containsKey(Constants.KEY_AGE)){
+            String str = b.getString(Constants.KEY_AGE);
+            ageDisplay.setText(str);
+        }
+
+        if (b.containsKey(Constants.KEY_JOB)){
+            String str = b.getString(Constants.KEY_JOB);
+            jobDisplay.setText(str);
+        }
+
+        if (b.containsKey(Constants.KEY_DESC)){
+            String str = b.getString(Constants.KEY_DESC);
+            descriptionDisplay.setText(str);
+        }
     }
+
+
+
 
     public void goToMainActivity(View view){
         Intent intent = new Intent(SecondActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Log.i(TAG, "onSaveInstanceState()");
+        outState.putString(Constants.KEY_NAME, nameDisplay.getText().toString());
+        outState.putString(Constants.KEY_AGE, ageDisplay.getText().toString());
+        outState.putString(Constants.KEY_JOB, jobDisplay.getText().toString());
+        outState.putString(Constants.KEY_DESC, descriptionDisplay.getText().toString());
     }
 
     @Override
