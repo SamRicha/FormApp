@@ -12,7 +12,6 @@ import android.view.ViewParent;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +23,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
-@LargeTest
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
 
@@ -51,15 +49,6 @@ public class MainActivityTest {
                                 0),
                         isDisplayed()));
         textView.check(matches(withText("Richardson, Sam 5/5/2018")));
-
-        ViewInteraction imageView = onView(
-                allOf(childAtPosition(
-                        childAtPosition(
-                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                1),
-                        0),
-                        isDisplayed()));
-        imageView.check(matches(isDisplayed()));
 
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.textView2), withText("Hello World"),
