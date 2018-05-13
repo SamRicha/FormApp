@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">FormApp</string>
-    <string name="personalText">Richardson, Sam 5/2/2018</string>
+    <string name="helloText">Hello World</string>
+    <string name="personalText">Richardson, Sam 5/5/2018</string>
     <string name="nameText">Name: </string>
     <string name="ageTag">Age: </string>
     <string name="descText">Description: </string>
     <string name="jobText">Job: </string>
-
+    <string name="profileTabText">Profile Tab</string>
+    <string name="settingsTabText">Settings Tab</string>
+    <string name="matchesTabText">Matches Tab</string>
     <string name="name_input">Enter Name</string>
     <string name="age_input">Enter Age</string>
     <string name="job_input">Enter job</string>

@@ -8,99 +8,37 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:fontFamily="monospace"
+        android:textSize="14sp"
         android:text="@string/personalText" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="0dp"
-        android:text="@string/nameText" />
-    <EditText
-        android:id="@+id/nameTextEdit"
+    <TableRow
         android:layout_width="match_parent"
-        android:hint="@string/name_input"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:inputType="text"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/pic" />
+    </TableRow>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:fontFamily="monospace"
         android:textSize="14sp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="0dp"
-        android:text="@string/jobText" />
-
-    <EditText
-        android:id="@+id/jobTextEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="40dp"
-        android:hint="@string/job_input"
-        android:inputType="text"
-        android:paddingBottom="10dp"
-        android:textSize="14sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="0dp"
-        android:text="@string/descText" />
-
-    <EditText
-        android:id="@+id/descriptionTextEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="40dp"
-        android:hint="@string/desc_input"
-        android:inputType="text"
-        android:paddingBottom="10dp"
-        android:textSize="14sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="0dp"
-        android:text="@string/ageTag" />
-
-    <EditText
-        android:id="@+id/ageTextEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="40dp"
-        android:hint="@string/age_input"
-        android:inputType="text"
-        android:paddingBottom="10dp"
-        android:textSize="14sp" />
-
-    <Button
-        android:id="@+id/SubmitButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="0dp"
-        android:clickable="true"
-        android:onClick="goToSecondActivity"
-        android:paddingBottom="20dp"
-        android:text="@string/submitText"
-        android:textSize="20sp" />
+        android:gravity="center"
+        android:text="@string/helloText" />
 
 </LinearLayout>
