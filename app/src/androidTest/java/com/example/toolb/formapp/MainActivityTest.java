@@ -35,7 +35,7 @@ public class MainActivityTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(60000);
+            Thread.sleep(3595802);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -50,15 +50,55 @@ public class MainActivityTest {
                         isDisplayed()));
         textView.check(matches(withText("Richardson, Sam 5/5/2018")));
 
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.textView2), withText("Hello World"),
+        ViewInteraction editText = onView(
+                allOf(withId(R.id.nameTextEdit), withText("Enter Name"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                1),
+                        isDisplayed()));
+        editText.check(matches(withText("Enter Name")));
+
+        ViewInteraction editText2 = onView(
+                allOf(withId(R.id.UserNameTextEdit), withText("Enter User Name"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
                                 2),
                         isDisplayed()));
-        textView2.check(matches(withText("Hello World")));
+        editText2.check(matches(withText("Enter User Name")));
+
+        ViewInteraction editText3 = onView(
+                allOf(withId(R.id.EmailTextEdit), withText("Enter Email Address"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                3),
+                        isDisplayed()));
+        editText3.check(matches(withText("Enter Email Address")));
+
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.dateTextView), withText("Select Your Birthday"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                4),
+                        isDisplayed()));
+        textView2.check(matches(withText("Select Your Birthday")));
+
+        ViewInteraction button = onView(
+                allOf(withId(R.id.SubmitButton),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                5),
+                        isDisplayed()));
+        button.check(matches(isDisplayed()));
 
     }
 
