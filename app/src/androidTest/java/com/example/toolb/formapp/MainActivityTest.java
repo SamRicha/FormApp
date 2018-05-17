@@ -1,7 +1,16 @@
 package com.example.toolb.formapp;
 
 
+import android.app.Activity;
+import android.app.Instrumentation;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.espresso.action.ViewActions;
+import android.support.test.espresso.intent.Intents;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
@@ -12,16 +21,26 @@ import android.view.ViewParent;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.allOf;
+import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static org.hamcrest.CoreMatchers.not;
 
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
@@ -29,95 +48,75 @@ public class MainActivityTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
+    @After
+    public void tearDown() {
+        // mActivity = null;
+    }
+
+
+    private String Name = "Sam";
+    private String age = "23";
+    private String Job = "student";
+    private String Bio = "I'm doing alright";
+
+
     @Test
-    public void mainActivityTest() {
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(3595802);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.textView1), withText("Richardson, Sam 5/5/2018"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView.check(matches(withText("Richardson, Sam 5/5/2018")));
-
-        ViewInteraction editText = onView(
-                allOf(withId(R.id.nameTextEdit), withText("Enter Name"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        editText.check(matches(withText("Enter Name")));
-
-        ViewInteraction editText2 = onView(
-                allOf(withId(R.id.UserNameTextEdit), withText("Enter User Name"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
-        editText2.check(matches(withText("Enter User Name")));
-
-        ViewInteraction editText3 = onView(
-                allOf(withId(R.id.EmailTextEdit), withText("Enter Email Address"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                3),
-                        isDisplayed()));
-        editText3.check(matches(withText("Enter Email Address")));
-
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.dateTextView), withText("Select Your Birthday"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                4),
-                        isDisplayed()));
-        textView2.check(matches(withText("Select Your Birthday")));
-
-        ViewInteraction button = onView(
-                allOf(withId(R.id.SubmitButton),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                5),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
-
+    public void testName() {
+        onView(withId(R.id.nameTextEdit)).perform(typeText(Name));
+        closeSoftKeyboard();
+        onView(withId(R.id.SubmitButton)).perform(click());
+        onView(withId(R.id.nameTextEdit)).check(matches(withText(Name)));
     }
 
-    private static Matcher<View> childAtPosition(
-            final Matcher<View> parentMatcher, final int position) {
 
-        return new TypeSafeMatcher<View>() {
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("Child at position " + position + " in parent ");
-                parentMatcher.describeTo(description);
-            }
-
-            @Override
-            public boolean matchesSafely(View view) {
-                ViewParent parent = view.getParent();
-                return parent instanceof ViewGroup && parentMatcher.matches(parent)
-                        && view.equals(((ViewGroup) parent).getChildAt(position));
-            }
-        };
+    @Test
+    public void testOccupation() {
+        onView(withId(R.id.jobTextEdit)).perform(typeText(Job));
+        closeSoftKeyboard();
+        onView(withId(R.id.SubmitButton)).perform(click());
+        onView(withId(R.id.jobTextEdit)).check(matches(withText(Job)));
     }
+
+    @Test
+    public void testBio() {
+        onView(withId(R.id.descriptionTextEdit)).perform(typeText(Bio));
+        closeSoftKeyboard();
+        onView(withId(R.id.SubmitButton)).perform(click());
+        onView(withId(R.id.descriptionTextEdit)).check(matches(withText(Bio)));
+    }
+
+    @Test
+    public void testAge() {
+        onView(withId(R.id.ageTextEdit)).perform(typeText(age));
+        closeSoftKeyboard();
+        onView(withId(R.id.SubmitButton)).perform(click());
+        onView(withId(R.id.ageTextEdit)).check(matches(withText(age)));
+    }
+
+    @Test
+    public void testSubmitButton() {
+
+        onView(withId(R.id.nameTextEdit)).perform(typeText(Name));
+        closeSoftKeyboard();
+
+        onView(withId(R.id.jobTextEdit)).perform(typeText(Job));
+        closeSoftKeyboard();
+
+        onView(withId(R.id.ageTextEdit)).perform(typeText(age));
+        closeSoftKeyboard();
+
+        onView(withId(R.id.descriptionTextEdit)).perform(typeText(Bio));
+        closeSoftKeyboard();
+
+        onView(withId(R.id.SubmitButton)).perform(click());
+
+        /*
+        onView(withId(R.id.nameDisplayTextView)).check(matches(withText(Name)));
+        onView(withId(R.id.ageDisplayTextView)).check(matches(withText(age)));
+        onView(withId(R.id.jobTextEdit)).check(matches(withText(Job)));
+        onView(withId(R.id.descriptionDisplayTextView)).check(matches(withText(Bio)));
+        */
+    }
+
+
 }

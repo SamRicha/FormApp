@@ -13,11 +13,11 @@ public class SecondActivity extends AppCompatActivity {
 
     private static final String TAG = SecondActivity.class.getSimpleName();
     private TextView messageView;
+    private Button loginBtn;
     private EditText nameIn;
     private EditText userNameIn;
     private EditText emailIn;
     private TextView dobIn;
-    private Button loginBtn;
 
 
     @Override
@@ -25,9 +25,10 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity);
 
-        messageView = findViewById(R.id.messageTextView);
-
-        StringBuilder msg = new StringBuilder("Thanks for signing up, ");
+        TextView nameDisplay = findViewById(R.id.nameDisplayTextView);
+        TextView ageDisplay = findViewById(R.id.ageDisplayTextView);
+        TextView jobDisplay = findViewById(R.id.occupationDisplayTextView);
+        TextView descriptionDisplay = findViewById(R.id.descriptionDisplayTextView);
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -38,27 +39,47 @@ public class SecondActivity extends AppCompatActivity {
             String name = b.getString(Constants.KEY_NAME);
             String lowerCaseName = name.toLowerCase();
             String properName = lowerCaseName.substring(0, 1).toUpperCase() + lowerCaseName.substring(1);
-            msg.append(properName).append("!");
+            nameDisplay.setText(properName);
         }
 
-        messageView.setText(msg);
-    }
+        if (b.containsKey(Constants.KEY_AGE)){
+            String str = b.getString(Constants.KEY_AGE);
+            ageDisplay.setText(str);
+        }
 
+        if (b.containsKey(Constants.KEY_JOB)){
+            String str = b.getString(Constants.KEY_JOB);
+            jobDisplay.setText(str);
+        }
+
+        if (b.containsKey(Constants.KEY_DESC)){
+            String str = b.getString(Constants.KEY_DESC);
+            descriptionDisplay.setText(str);
+        }
+
+        /*
+        profilename.setText(name);
+        profileage.setText(age);
+        profileocuppation.setText(job);
+        profilebio.setText(bio);
+        */
+    }
     public void goToMainActivity(View view){
         Intent intent = new Intent(SecondActivity.this, MainActivity.class);
         startActivity(intent);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(TAG, "onStart()");
+        //this.finish();
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
         Log.i(TAG, "onRestart()");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "onStart()");
     }
 
     @Override

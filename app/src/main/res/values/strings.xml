@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FormApp</string>
     <string name="helloText">Hello World</string>
-    <string name="personalText">Richardson, Sam 5/5/2018</string>
+    <string name="personalText">Richardson, Sam 5/16/2018</string>
     <string name="nameText">Name: </string>
     <string name="ageTag">Age: </string>
     <string name="descText">Description: </string>
@@ -15,9 +15,15 @@
     <string name="desc_input">Enter "About You"</string>
     <string name="submitText">Submit</string>
     <string name="backText">Go Back</string>
+    <string name="picDesc">avatar icon</string>
     <string name="birthday_input">Select Your Birthday</string>
     <string name="email_input">Enter Email Address</string>
     <string name="user_name_input">Enter User Name</string>
+
+    <string name="nameDef">[name]</string>
+    <string name="bioDef">[bio]</string>
+    <string name="jobDef">[job]</string>
+    <string name="ageDef">[age]</string>
 
 
 </resources>
