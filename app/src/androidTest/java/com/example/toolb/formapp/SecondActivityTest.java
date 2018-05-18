@@ -81,5 +81,9 @@ public class SecondActivityTest {
                 .check(matches(isDisplayed()));
     }
 
+    @Test
+    public void testSubmitButton() {
+        onView(withId(R.id.goBackButton)).perform(click());
+    }
 
 }
